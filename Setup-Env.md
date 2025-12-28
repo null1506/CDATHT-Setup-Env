@@ -24,32 +24,53 @@ Cấu hình trong VMware Workstation / VirtualBox:
     * IP tĩnh: `192.168.148.131`
     * Subnet mask: `255.255.255.0`
     * DNS: `127.0.0.1`
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture2.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture3.png)
 ### Cài đặt Roles & Policy
 1.  **AD DS:** Promote lên Domain Controller với tên miền `KMA.local`. Mật khẩu DSRM: `Admin@123`.
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture4.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture5.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture6.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture7.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture8.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture9.png)
-3.  **AD CS:**
+
+2.  **AD CS:**
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture10.png)
     * Chọn role **Certification Authority**.
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture11.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture12.png)
     * Cấu hình: **Enterprise CA** -> **Root CA**.
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture13.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture14.png)
     * Tên CA: `YENKMA-KMASERVER-CA`.
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture15.png)
-5.  **Tạo User:** Tạo người dùng `yen1` (Pass: `Admin@123`) trong *AD Users and Computers*.
+
+3.  **Tạo User:** Tạo người dùng `yen1` (Pass: `Admin@123`) trong *AD Users and Computers*.
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture16.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture17.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture18.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture19.png)
-6.  **Kiểm tra MachineAccountQuota:**
+
+4.  **Kiểm tra MachineAccountQuota:**
     Đảm bảo giá trị bằng `10` để phục vụ tấn công tạo máy ảo giả mạo. Kiểm tra bằng PowerShell:
     ```powershell
     ([adsisearcher]"(objectClass=domainDNS)").FindOne().Properties["ms-ds-machineaccountquota"]
@@ -66,11 +87,17 @@ Máy này đóng vai trò máy trạm của người dùng và là bàn đạp (
 * **Cấu hình mạng (Dual-Homed):**
     * **Card 1 (VMnet8 - NAT):** IP `192.168.43.130` (Dùng để nhận payload từ Attacker).
     * **Card 2 (VMnet2 - Host-only):** IP `192.168.148.133`, DNS `192.168.148.131`.
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture21.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture22.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture23.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture24.png)
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture25.png)
+
 * **Join Domain:** Gia nhập miền `KMA.local` bằng user Administrator. Sau đó đăng nhập bằng `KMA\yen1`.
 * **Lưu ý:** Tắt Windows Defender và Firewall để thuận tiện cho việc thực tập ban đầu.
 

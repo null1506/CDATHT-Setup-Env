@@ -47,19 +47,19 @@ Cấu hình trong VMware Workstation / VirtualBox:
 
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture10.png)
     
-    * Chọn role **Certification Authority**.
+   * Chọn role **Certification Authority**.
 
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture11.png)
 
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture12.png)
     
-    * Cấu hình: **Enterprise CA** -> **Root CA**.
+   * Cấu hình: **Enterprise CA** -> **Root CA**.
 
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture13.png)
 
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture14.png)
    
-    * Tên CA: `YENKMA-KMASERVER-CA`.
+   * Tên CA: `YENKMA-KMASERVER-CA`.
 
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture15.png)
 

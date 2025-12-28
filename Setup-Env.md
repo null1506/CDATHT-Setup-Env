@@ -104,6 +104,10 @@ Máy này đóng vai trò máy trạm của người dùng và là bàn đạp (
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture26.png)
 
 * **Join Domain:** Gia nhập miền `KMA.local` bằng user Administrator. Sau đó đăng nhập bằng `KMA\yen1`.
+
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture27.png)
+
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture28.png)
 * **Lưu ý:** Tắt Windows Defender và Firewall để thuận tiện cho việc thực tập ban đầu.
 
 ---

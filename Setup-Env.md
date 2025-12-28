@@ -13,10 +13,14 @@ Bước 2: Cấu hình các máy
 
   •	Hệ điều hành: Windows Server 2016
   
-    Cấu hình mạng (Network Adapter):
-        o Chỉ gắn 1 card mạng vào VMnet2 (Host-only).
-        o	IP tĩnh: 192.168.148.131 
-        o	Subnet mask: 255.255.255.0
-        o	DNS: 127.0.0.1 
+  Cấu hình mạng (Network Adapter):
+  
+  o Chỉ gắn 1 card mạng vào VMnet2 (Host-only).
+  
+  o	IP tĩnh: 192.168.148.131 
+  
+  o	Subnet mask: 255.255.255.0
+  
+  o	DNS: 127.0.0.1 
 
 

@@ -3,7 +3,7 @@ Bước 1: Thiết lập Mạng Ảo (Virtual Network Editor)
 •	VMnet8 (NAT): Dải IP 192.168.43.0/24. Đây là vùng mạng giả lập Internet/Mạng ngoài, nơi máy tấn công và máy nạn nhân giao tiếp.
 
 •	VMnet2 (Host-only): Dải IP 192.168.148.0/24. Đây là vùng mạng nội bộ (Intranet) bảo mật, nơi đặt Domain Controller.
-![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture1.png)
+
 
 # Hướng dẫn Thiết lập Môi trường Lab Active Directory Security (AD CS Focus)
 
@@ -20,6 +20,7 @@ Cấu hình trong VMware Workstation / VirtualBox:
 | **VMnet8** | NAT | `192.168.43.0/24` | Mạng ngoài (Internet giả lập). Nơi Attacker và Victim (Card 1) giao tiếp. |
 | **VMnet2** | Host-only | `192.168.148.0/24` | Mạng nội bộ (Intranet). Nơi đặt Domain Controller, cực kỳ bảo mật. |
 
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture1.png)
 ---
 
 ## 2. Cấu hình Máy 1: Domain Controller (Mục tiêu)

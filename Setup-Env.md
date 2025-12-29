@@ -214,7 +214,9 @@ Vào thư mục dự án theo đường dẫn: Certify\bin\Release\. Ta sẽ th�
 
 Kiểm tra trạng thái của tính năng Remote Desktop (RDP) trên máy tính Windows thông qua Registry.
 
-`yen1> reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections`
+```
+yen1> reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections
+```
 
 - `reg query`: Lệnh dùng để truy vấn/đọc thông tin từ Registry.
 
@@ -224,16 +226,18 @@ Kiểm tra trạng thái của tính năng Remote Desktop (RDP) trên máy tính
 
 Khi chạy lệnh này, bạn sẽ nhận được một giá trị số (thường là dạng Hexadecimal). Bạn cần chú ý vào số cuối cùng:
 
-Giá trị là 0x1 (1): Remote Desktop đang bị TẮT (Từ chối kết nối).
+Giá trị là `0x1` (1): Remote Desktop đang bị TẮT (Từ chối kết nối).
 
-Giá trị là 0x0 (0): Remote Desktop đang được BẬT (Cho phép kết nối).
+Giá trị là `0x0` (0): Remote Desktop đang được BẬT (Cho phép kết nối).
 
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture39.png)
 
-Ta thấy kết quả là 0x1, tức Remote Desktop đang bị tắt
+Ta thấy kết quả là `0x1`, tức Remote Desktop đang bị tắt
 
 Lệnh bật tính năng RDP trong Hệ điều hành
-`C:\Windows\system32> reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f`
+```
+C:\Windows\system32> reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+```
 
 Mục đích: Ghi đè giá trị vào Registry để hệ thống "mở cửa" cho phép kết nối từ xa.
 
@@ -246,16 +250,19 @@ Phân tích:
 - `/f`: (Force) Ép thực hiện thay đổi mà không cần hỏi xác nhận.
 
 Lệnh mở cổng qua Firewall (Tường lửa)
+
 `netsh advfirewall firewall set rule group="remote desktop" new enable=Yes`
 
 Mục đích: Dù Windows đã cho phép RDP (ở bước 1), nhưng nếu Tường lửa vẫn chặn cổng 3389, bạn vẫn không thể kết nối được. Lệnh này sẽ mở tất cả các luật (rules) liên quan đến Remote Desktop trong Windows Firewall.
 
 Lệnh kiểm tra thành viên nhóm Remote Desktop
+
 `net localgroup "Remote Desktop Users"`
 
 Mục đích: Liệt kê danh sách tất cả các tài khoản hiện đang có quyền đăng nhập vào máy này qua RDP.
 
 Lệnh cấp quyền RDP cho một User cụ thể
+
 `net localgroup "Remote Desktop Users" KMA\yen1 /add`
 
 Mục đích: Thêm tài khoản miền KMA\yen1 vào nhóm cục bộ "Remote Desktop Users".

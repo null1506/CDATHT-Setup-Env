@@ -133,7 +133,7 @@ socks4 127.0.0.1 9050
 
 ## 5. Tải công cụ trên máy tấn công (Kali Linux)
 
-* **Kerbrute** Gắn 1 card vào **VMnet8** (NAT). IP: `192.168.43.128`.
+### **Kerbrute** 
 Dùng để dò quét (brute-force) tên người dùng và mật khẩu qua giao thức Kerberos một cách nhanh chóng và ít bị phát hiện hơn.
 
 Cách tải: Công cụ này được viết bằng Go, bạn cần tải file binary đã biên dịch sẵn (pre-compiled).
@@ -151,7 +151,7 @@ chmod +x kerbrute
 
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture33.png)
 
-* **Metasploit Framework**
+### **Metasploit Framework**
 Dùng để tạo backdoor, điều khiển máy nạn nhân
 
 Cách tải: Hai công cụ này đã được cài sẵn mặc định trên Kali Linux. Không cần tải thêm.

@@ -103,11 +103,14 @@ Máy này đóng vai trò máy trạm của người dùng và là bàn đạp (
 
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture26.png)
 
-* **Join Domain:** Gia nhập miền `KMA.local` bằng user Administrator. Sau đó đăng nhập bằng `KMA\yen1`.
-
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture27.png)
 
+* **Join Domain:** Gia nhập miền `KMA.local` bằng user Administrator. Sau đó đăng nhập bằng `KMA\yen1`.
+
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture28.png)
+
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture29.png)
+
 * **Lưu ý:** Tắt Windows Defender và Firewall để thuận tiện cho việc thực tập ban đầu.
 
 ---
@@ -117,9 +120,41 @@ Máy này đóng vai trò máy trạm của người dùng và là bàn đạp (
 * **Hệ điều hành:** Kali Linux.
 * **Mạng:** Gắn 1 card vào **VMnet8** (NAT). IP: `192.168.43.128`.
 
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture30.png)
+
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture31.png)
 ### Cấu hình Proxychains
 Mở file `/etc/proxychains4.conf` và thêm vào cuối file:
 ```text
 socks4 127.0.0.1 9050
+```
 
+---
+
+## 5. Tải công cụ trên máy tấn công (Kali Linux)
+
+* **Kerbrute** Gắn 1 card vào **VMnet8** (NAT). IP: `192.168.43.128`.
+Dùng để dò quét (brute-force) tên người dùng và mật khẩu qua giao thức Kerberos một cách nhanh chóng và ít bị phát hiện hơn.
+
+Cách tải: Công cụ này được viết bằng Go, bạn cần tải file binary đã biên dịch sẵn (pre-compiled).
+1.	Truy cập: https://github.com/ropnop/kerbrute/releases
+2.	Tải file phù hợp (thường là kerbrute_linux_amd64).
+`wget https://github.com/ropnop/kerbrute/releases/download/v1.0.3/kerbrute_linux_amd64`
+
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture32.png)
+
+3.	Đổi tên và cấp quyền thực thi:
+```cmd
+mv kerbrute_linux_amd64 kerbrute
+chmod +x kerbrute
+```
+
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture33.png)
+
+* **Metasploit Framework**
+Dùng để tạo backdoor, điều khiển máy nạn nhân
+
+Cách tải: Hai công cụ này đã được cài sẵn mặc định trên Kali Linux. Không cần tải thêm.
+
+Kiểm tra Metasploit: Gõ msfconsole.
 

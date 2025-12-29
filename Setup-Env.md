@@ -169,7 +169,9 @@ sudo apt install freerdp3-x11
 
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture34.png)
 
-## 5. Tải công cụ trên máy tấn công (Kali Linux)
+---
+
+## 6. Tải công cụ trên máy nạn nhân (Windows 10)
 
 ### **Python** 
 Dùng để tải Certipy.

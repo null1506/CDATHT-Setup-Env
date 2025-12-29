@@ -156,5 +156,25 @@ Dùng để tạo backdoor, điều khiển máy nạn nhân
 
 Cách tải: Hai công cụ này đã được cài sẵn mặc định trên Kali Linux. Không cần tải thêm.
 
-Kiểm tra Metasploit: Gõ msfconsole.
+Kiểm tra Metasploit: Gõ `msfconsole`.
+
+### **xFreeRDP**
+Dùng để Remote Desktop vào máy nạn nhân khi đã có tài khoản (bước kiểm tra cuối cùng).
+
+Cách tải: Gõ các lệnh sau
+```
+apt search freerdp
+sudo apt install freerdp3-x11
+```
+
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture34.png)
+
+## 5. Tải công cụ trên máy tấn công (Kali Linux)
+
+### **Kerbrute** 
+Dùng để dò quét (brute-force) tên người dùng và mật khẩu qua giao thức Kerberos một cách nhanh chóng và ít bị phát hiện hơn.
+
+Cách tải: Công cụ này được viết bằng Go, bạn cần tải file binary đã biên dịch sẵn (pre-compiled).
+1.	Truy cập: https://github.com/ropnop/kerbrute/releases
+2.	Tải file phù hợp (thường là ker
 

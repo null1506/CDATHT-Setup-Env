@@ -212,7 +212,9 @@ Vào thư mục dự án theo đường dẫn: Certify\bin\Release\. Ta sẽ th�
 
 ![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture38.png)
 
-## 6. Cấu hình máy Victim cho phép Remote##
+---
+
+## 7. Cấu hình máy Victim cho phép Remote
 
 Kiểm tra trạng thái của tính năng Remote Desktop (RDP) trên máy tính Windows thông qua Registry.
 

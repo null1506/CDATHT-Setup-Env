@@ -171,10 +171,93 @@ sudo apt install freerdp3-x11
 
 ## 5. Tải công cụ trên máy tấn công (Kali Linux)
 
-### **Kerbrute** 
-Dùng để dò quét (brute-force) tên người dùng và mật khẩu qua giao thức Kerberos một cách nhanh chóng và ít bị phát hiện hơn.
+### **Python** 
+Dùng để tải Certipy.
 
-Cách tải: Công cụ này được viết bằng Go, bạn cần tải file binary đã biên dịch sẵn (pre-compiled).
-1.	Truy cập: https://github.com/ropnop/kerbrute/releases
-2.	Tải file phù hợp (thường là ker
+Cách tải: Truy cập vào đây để tải bản 3.13.11: https://www.python.org/downloads/windows/
 
+### **Certify.exe (Optional)**
+Dùng để quét lỗ hổng chứng chỉ từ bên trong máy nạn nhân
+
+Cách tải: Đây là công cụ viết bằng C#. Tác giả (GhostPack) không cung cấp file .exe sẵn vì lý do an toàn.
+
+1.	Truy cập GitHub chính thức của GhostPack: https://github.com/GhostPack/Certify
+2.	Tải file zip về và giải nén
+3.	Tải Visual Studio 2022 Community tại: https://www.windowsmode.com/download-visual-studio-2022-for-windows/
+4.	Cấu hình biên dịch và biên dịch
+
+4.1. File code sau khi giải nén, tìm file Certify.sln và mở bằng VS 2022 Community
+
+4.2. Tìm ô đang để chữ Debug và đổi thành Release (Chế độ Release giúp file nhẹ hơn và bỏ các thông tin gỡ lỗi không cần thiết).
+
+4.3. Chọn kiến trúc là Any CPU hoặc x64.
+
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture35.png)
+
+4.4. Biên dịch ra file .exe
+
+Trên thanh menu, chọn Build -> Build Solution (hoặc nhấn phím tắt Ctrl + Shift + B). (Nếu có warning thì tắt Visual đi bật lại)
+
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture36.png)
+
+Nhìn xuống khung Output bên dưới, nếu thấy dòng Build succeeded là thành công.
+
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture37.png)
+
+5. Lấy file sản phẩm
+
+Vào thư mục dự án theo đường dẫn: Certify\bin\Release\. Ta sẽ thấy file Certify.exe. Đây chính là file mà chúng ta sẽ thực thi.
+
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture38.png)
+
+## 6. Cấu hình máy Victim cho phép Remote##
+
+Kiểm tra trạng thái của tính năng Remote Desktop (RDP) trên máy tính Windows thông qua Registry.
+
+`yen1> reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections`
+
+- `reg query`: Lệnh dùng để truy vấn/đọc thông tin từ Registry.
+
+- `"HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server"`: Đường dẫn đến khóa Registry quản lý các thiết lập của Terminal Server (tên cũ của Remote Desktop Services).
+
+- `/v fDenyTSConnections`: Yêu cầu hiển thị giá trị của biến cụ thể tên là fDenyTSConnections (viết tắt của Force Deny Terminal Server Connections).
+
+Khi chạy lệnh này, bạn sẽ nhận được một giá trị số (thường là dạng Hexadecimal). Bạn cần chú ý vào số cuối cùng:
+
+Giá trị là 0x1 (1): Remote Desktop đang bị TẮT (Từ chối kết nối).
+
+Giá trị là 0x0 (0): Remote Desktop đang được BẬT (Cho phép kết nối).
+
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture39.png)
+
+Ta thấy kết quả là 0x1, tức Remote Desktop đang bị tắt
+
+Lệnh bật tính năng RDP trong Hệ điều hành
+`C:\Windows\system32> reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f`
+
+Mục đích: Ghi đè giá trị vào Registry để hệ thống "mở cửa" cho phép kết nối từ xa.
+
+Phân tích:
+
+- `fDenyTSConnections`: Như đã giải thích ở câu trước, giá trị 0 có nghĩa là "Không từ chối" (tức là Cho phép).
+
+- `/t REG_DWORD`: Xác định kiểu dữ liệu là số nguyên.
+
+- `/f`: (Force) Ép thực hiện thay đổi mà không cần hỏi xác nhận.
+
+Lệnh mở cổng qua Firewall (Tường lửa)
+`netsh advfirewall firewall set rule group="remote desktop" new enable=Yes`
+
+Mục đích: Dù Windows đã cho phép RDP (ở bước 1), nhưng nếu Tường lửa vẫn chặn cổng 3389, bạn vẫn không thể kết nối được. Lệnh này sẽ mở tất cả các luật (rules) liên quan đến Remote Desktop trong Windows Firewall.
+
+Lệnh kiểm tra thành viên nhóm Remote Desktop
+`net localgroup "Remote Desktop Users"`
+
+Mục đích: Liệt kê danh sách tất cả các tài khoản hiện đang có quyền đăng nhập vào máy này qua RDP.
+
+Lệnh cấp quyền RDP cho một User cụ thể
+`net localgroup "Remote Desktop Users" KMA\yen1 /add`
+
+Mục đích: Thêm tài khoản miền KMA\yen1 vào nhóm cục bộ "Remote Desktop Users".
+
+![alt](https://github.com/null1506/CDATHT-Setup-Env/blob/main/img/Picture40.png)
